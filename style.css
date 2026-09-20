@@ -1,13 +1,81 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body{
+/* Modern Typography & Color Configuration */
+:root {
+    --font-primary: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --color-bg: #4CB5CE;       /* Sky blue */
+    --color-text: #2D398B;     /* Deep blue */
+    --color-text-light: #ffffff; /* Contrast white */
+    
+    /* Animation Variable */
+    --transition-entrance: cubic-bezier(0.16, 1, 0.3, 1); /* Ultra-smooth modern easing */
+}
+
+.first {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: navy;
-    color: antiquewhite;
+    text-align: center;
+    height: 100vh;
+    background-color: var(--color-bg);
+    padding: 2rem;
+    font-family: var(--font-primary);
+    overflow: hidden; /* Prevents tiny scrollbars during the slide-up effect */
+}
+
+/* Main Hero Heading */
+.first h1 {
+    font-size: clamp(2.5rem, 6vw + 1rem, 4.5rem);
+    font-weight: 800;
+    color: var(--color-text);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+    text-wrap: balance;
+
+    /* Entrance Animation */
+    animation: fadeRise 0.8s var(--transition-entrance) forwards;
+    opacity: 0; /* Starts hidden until animation plays */
+}
+
+/* Subheading / Secondary Tagline */
+.first h2 {
+    font-size: clamp(1.5rem, 3vw + 1rem, 2.25rem);
+    font-weight: 500;
+    color: var(--color-text-light); 
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    max-width: 600px;
+    text-wrap: balance;
+
+    /* Entrance Animation with Staggered Delay */
+    animation: fadeRise 0.8s var(--transition-entrance) forwards;
+    animation-delay: 0.15s; /* Delays the h2 slightly for a premium sequence */
+    opacity: 0; /* Starts hidden */
+}
+
+/* Modern Fade-and-Rise Keyframes */
+@keyframes fadeRise {
+    from {
+        opacity: 0;
+        transform: translateY(20px); /* Smoothly glides up from 20px below */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Accessibility: Respects users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .first h1, .first h2 {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
 }
